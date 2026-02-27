@@ -12,32 +12,49 @@ resources:
   jobs:
     setup_solution_accelerator:
       name: "Run all notebooks to setup the accelerator"
+      job_clusters:
+        - job_cluster_key: default
+          new_cluster:
+            spark_version: 16.4.x-scala2.13
+            node_type_id: Standard_D4s_v3
+            num_workers: 1
       tasks:
         - task_key: create_bronze_table
+          job_cluster_key: default
           notebook_task:
             notebook_path: ./1-Create-Sensor-Bronze-Table.ipynb
 
         - task_key: setup_mapping_pipeline
           depends_on:
             - task_key: create_bronze_table
+          job_cluster_key: default
           notebook_task:
             notebook_path: ./3-Setup-Mapping-Pipeline.ipynb
 
         - task_key: sync_to_lakebase
           depends_on:
             - task_key: setup_mapping_pipeline
+          job_cluster_key: default
           notebook_task:
             notebook_path: ./4-Sync-To-Lakebase.ipynb
 
         - task_key: create_app
           depends_on:
             - task_key: sync_to_lakebase
+          job_cluster_key: default
           notebook_task:
             notebook_path: ./5-Create-App.ipynb
 
     teardown_solution_accelerator:
       name: "Remove all resources created for the solution accelerator"
+      job_clusters:
+        - job_cluster_key: default
+          new_cluster:
+            spark_version: 16.4.x-scala2.13
+            node_type_id: Standard_D4s_v3
+            num_workers: 1
       tasks:
         - task_key: cleanup
+          job_cluster_key: default
           notebook_task:
             notebook_path: ./6-Cleanup.ipynb
