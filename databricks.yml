@@ -18,6 +18,7 @@ resources:
             spark_version: 16.4.x-scala2.13
             node_type_id: Standard_D4s_v3
             num_workers: 1
+            data_security_mode: USER_ISOLATION
       tasks:
         - task_key: create_bronze_table
           job_cluster_key: default
@@ -53,6 +54,7 @@ resources:
             spark_version: 16.4.x-scala2.13
             node_type_id: Standard_D4s_v3
             num_workers: 1
+            data_security_mode: USER_ISOLATION
       tasks:
         - task_key: cleanup
           job_cluster_key: default
