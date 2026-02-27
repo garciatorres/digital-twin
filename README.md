@@ -4,6 +4,11 @@
 
 ---
 
+## Fork notice (non-Zerobus variant)
+
+This repository is a fork of [`databricks-industry-solutions/digital-twin`](https://github.com/databricks-industry-solutions/digital-twin).
+It is configured to run **without Databricks Zerobus Ingest** by using the included `line_data_generator` step and skipping the Zerobus ingestion task in the Databricks Asset Bundle job.
+
 ## Overview
 
 This repository contains an end-to-end implementation of a **Digital Twin** for a ball bearing manufacturing process. A digital twin is a virtual representation of physical assets that synchronizes with real-world sensor data in real-time, enabling monitoring, analysis, and optimization of industrial processes.
