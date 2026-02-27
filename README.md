@@ -75,14 +75,12 @@ The fastest way to deploy this solution is using Databricks Asset Bundles, which
 
 The bundle will automatically:
 - Create all required Delta tables
-- Set up Zerobus ingestion endpoints
+- Generate synthetic sensor telemetry data (no Zerobus required)
 - Deploy the mapping pipeline
 - Configure Lakebase synchronization
 - Launch the visualization app
 
-**Important!** Ingesting data via Zerobus Ingest is not strictly necessary to successfully run this Solution Accelerator. If you don't have access to Zerobus, you can skip this task by following these steps:
-- Comment out or remove the whole task_key named "ingest_data" in the databricks.yml file.
-- Modify the task_key named "setup_mapping_pipeline" to depend from "create_bronze_table" instead of "ingest_data"
+**Important!** Ingesting data via Zerobus Ingest is not strictly necessary to successfully run this Solution Accelerator. In this project, the bundle has already been updated to run without Zerobus by removing the `ingest_data` task and making `setup_mapping_pipeline` depend on `create_bronze_table`.
 
 #### Cleanup
 
@@ -116,9 +114,7 @@ Define and create the Delta table where Zerobus will store incoming IoT telemetr
 #### **2-Ingest-Data-Zerobus**
 Set up the Zerobus endpoint and connect it to the bronze table. This notebook demonstrates how to write data to the Zerobus API (in production, this would be done by the IoT devices themselves).
 
-**Important!** Ingesting data via Zerobus Ingest is not strictly necessary to successfully run this Solution Accelerator. If you don't have access to Zerobus, you can skip this notebook and move to the following notebook. If you are deploying via Databricks Asset Bundles, you can skip this task by following these steps:
-- Comment out or remove the whole task_key named "ingest_data" in the databricks.yml file.
-- Modify the task_key named "setup_mapping_pipeline" to depend from "create_bronze_table" instead of "ingest_data"
+**Important!** If you don't have access to Zerobus, you can skip this notebook and move to the next step. If you're deploying via Databricks Asset Bundles from this project, the bundle is already configured to run without Zerobus.
 
 #### **3-Setup-Mapping-Pipeline**
 Convert incoming sensor data into timestamped RDF triples that are compatible with the digital twin ontology. Uses **Lakeflow Declarative Pipelines** with the **spark-r2r library** to perform the semantic mapping.
