@@ -6,7 +6,7 @@ targets:
     mode: development
     default: true
     workspace:
-      root_path: ~/.databricks/bundles/digital-twins
+      root_path: /Workspace/Users/douglas.garcia@databricks.com/digital-twins-bundle
 
 resources:
   jobs:
